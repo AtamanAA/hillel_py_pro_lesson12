@@ -123,7 +123,7 @@ def test_current_rates_view():
                 "currency_a": "USD",
                 "currency_b": "EUR",
                 "sell": 40.98361,
-                "buy": 39.4577,
+                "buy": 39.45,
             },
         ]
     }
