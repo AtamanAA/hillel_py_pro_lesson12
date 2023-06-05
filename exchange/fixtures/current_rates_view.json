@@ -1,0 +1,94 @@
+{
+  "current_rates": [
+    {
+      "id": 60,
+      "date": "2023-05-19",
+      "vendor": "currency",
+      "currency_a": "EUR",
+      "currency_b": "UAH",
+      "sell": 40.01921,
+      "buy": 40.01921
+    },
+    {
+      "id": 59,
+      "date": "2023-05-19",
+      "vendor": "currency",
+      "currency_a": "USD",
+      "currency_b": "UAH",
+      "sell": 36.92489,
+      "buy": 36.92489
+    },
+    {
+      "id": 68,
+      "date": "2023-05-19",
+      "vendor": "mono",
+      "currency_a": "EUR",
+      "currency_b": "UAH",
+      "sell": 40.7498,
+      "buy": 39.5
+    },
+    {
+      "id": 63,
+      "date": "2023-05-19",
+      "vendor": "mono",
+      "currency_a": "USD",
+      "currency_b": "UAH",
+      "sell": 37.4406,
+      "buy": 36.65
+    },
+    {
+      "id": 57,
+      "date": "2023-05-19",
+      "vendor": "oschad",
+      "currency_a": "EUR",
+      "currency_b": "UAH",
+      "sell": 39.5471,
+      "buy": 39.5471
+    },
+    {
+      "id": 64,
+      "date": "2023-05-19",
+      "vendor": "oschad",
+      "currency_a": "USD",
+      "currency_b": "UAH",
+      "sell": 36.5686,
+      "buy": 36.5686
+    },
+    {
+      "id": 62,
+      "date": "2023-05-19",
+      "vendor": "privat",
+      "currency_a": "EUR",
+      "currency_b": "UAH",
+      "sell": 40.98361,
+      "buy": 39.45
+    },
+    {
+      "id": 61,
+      "date": "2023-05-19",
+      "vendor": "privat",
+      "currency_a": "USD",
+      "currency_b": "UAH",
+      "sell": 37.45318,
+      "buy": 36.5686
+    },
+    {
+      "id": 65,
+      "date": "2023-05-19",
+      "vendor": "vkurse",
+      "currency_a": "EUR",
+      "currency_b": "UAH",
+      "sell": 40.8,
+      "buy": 40.55
+    },
+    {
+      "id": 58,
+      "date": "2023-05-19",
+      "vendor": "vkurse",
+      "currency_a": "USD",
+      "currency_b": "UAH",
+      "sell": 37.5,
+      "buy": 37.35
+    }
+  ]
+}
