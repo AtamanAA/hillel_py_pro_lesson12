@@ -24,6 +24,20 @@ def current_rates(request):
     )
 
 
+def best_rate_object(date, currency, operation):
+    rates = (
+        Rate.objects.exclude(vendor="oschad")
+        .exclude(vendor="currency")
+        .filter(date=date, currency_a=currency)
+        .all()
+        .values()
+    )
+    if operation == "sell":
+        return rates.order_by("sell").last()
+    elif operation == "buy":
+        return rates.order_by("buy").first()
+
+
 def index(request):
     if request.method == "POST":
         form = ExchangeForm(request.POST)
@@ -31,22 +45,11 @@ def index(request):
             currency_value = form.cleaned_data["currency_value"]
             operation = form.cleaned_data["operation"]
             currency = form.cleaned_data["currency"]
-
             current_date = datetime.date.today()
-            current_rates = (
-                Rate.objects.exclude(vendor="oschad")
-                .exclude(vendor="currency")
-                .filter(date=current_date, currency_a=currency)
-                .all()
-                .values()
-            )
 
-            if operation == "sell":
-                best_rate = current_rates.order_by("sell").last()
-            elif operation == "buy":
-                best_rate = current_rates.order_by("buy").first()
-
+            best_rate = best_rate_object(current_date, currency, operation)
             result = best_rate[operation] * currency_value
+
             context = {
                 "form": form,
                 "result": result,

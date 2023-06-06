@@ -1,9 +1,9 @@
 import json
 import pathlib
-
 import pytest
 import responses
 from django.core.management import call_command
+from django.test.client import RequestFactory
 from freezegun import freeze_time
 
 from .exchange_provider import (
@@ -14,7 +14,7 @@ from .exchange_provider import (
     VkurseExchange,
     MinfinExchange,
 )
-from .views import current_rates
+from .views import current_rates, index, best_rate_object
 
 root = pathlib.Path(__file__).parent
 
@@ -112,7 +112,7 @@ def test_current_rates_view():
                 "date": "2023-05-19",
                 "vendor": "mono",
                 "currency_a": "USD",
-                "currency_b": "EUR",
+                "currency_b": "UAH",
                 "sell": 40.7498,
                 "buy": 39.5,
             },
@@ -121,9 +121,68 @@ def test_current_rates_view():
                 "date": "2023-05-19",
                 "vendor": "privat",
                 "currency_a": "USD",
-                "currency_b": "EUR",
+                "currency_b": "UAH",
                 "sell": 40.98361,
                 "buy": 39.45,
             },
         ]
     }
+
+
+@freeze_time("2023-05-19")
+@pytest.mark.django_db
+def test_index_view_get():
+    rf = RequestFactory()
+    get_request = rf.get("")
+    response = index(get_request)
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_best_rate_object_sell():
+    current_date = "2023-05-19"
+    currency = "USD"
+    operation = "sell"
+    best_rate = best_rate_object(current_date, currency, operation)
+    assert float(best_rate[operation]) == 40.98361
+
+
+@pytest.mark.django_db
+def test_best_rate_object_buy():
+    current_date = "2023-05-19"
+    currency = "USD"
+    operation = "buy"
+    best_rate = best_rate_object(current_date, currency, operation)
+    assert float(best_rate[operation]) == 39.45
+
+
+@freeze_time("2023-05-19")
+@pytest.mark.django_db
+def test_index_view_post_sell():
+    rf = RequestFactory()
+    post_request = rf.post(
+        "",
+        {
+            "currency_value": "100",
+            "operation": "sell",
+            "currency": "USD",
+        },
+    )
+    response = index(post_request)
+    assert response.status_code == 200
+
+
+@freeze_time("2023-05-19")
+@pytest.mark.django_db
+def test_index_view_post_buy():
+    rf = RequestFactory()
+    post_request = rf.post(
+        "",
+        {
+            "currency_value": "100",
+            "operation": "buy",
+            "currency": "USD",
+        },
+    )
+    response = index(post_request)
+    assert response.status_code == 200

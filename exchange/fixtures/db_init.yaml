@@ -4,7 +4,7 @@
     date: 2023-05-19
     vendor: mono
     currency_a: USD
-    currency_b: EUR
+    currency_b: UAH
     sell: 40.7498
     buy: 39.5
 - model: exchange.rate
@@ -13,6 +13,6 @@
     date: 2023-05-19
     vendor: privat
     currency_a: USD
-    currency_b: EUR
+    currency_b: UAH
     sell: 40.98361
     buy: 39.45
